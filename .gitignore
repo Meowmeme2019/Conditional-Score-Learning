@@ -1,0 +1,12 @@
+# Jupyter checkpoints
+.ipynb_checkpoints/
+**/.ipynb_checkpoints/
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+
+# Large model files (optional, remove if you want to keep them)
+# *.pth
+# *.pt
