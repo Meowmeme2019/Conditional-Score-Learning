@@ -32,15 +32,26 @@ Key contributions:
 
 ```
 .
-├── non_Gaussian_MC/          # Experiments on synthetic non-Gaussian Markov chains
-├── training_amc/             # Experiments on CMU Motion Capture data
-│   ├── running/              # AMC/ASF motion capture files by subject
-│   ├── train_CMU_motion.py   # Training script for CMU data
-│   └── ...
-├── Messy_data_Training_conditional_score.py   # Score network training (main)
-├── Messy_data_Training_resume.py              # Resume training from checkpoint
-├── MoCapAnimateAsfAmc.py                      # Motion capture data loader/animator
-├── train_two_markov_chains.py                 # Train on two Markov chain settings
+├── non_Gaussian_MC/                          # Synthetic non-Gaussian Markov chain experiments
+│   ├── Train_NonGaussian_ConditionalScore.py # Training script for non-Gaussian MC
+│   ├── change_detecion_Gaussian_Kernel_nonlinear_mean_submitted_version_oct_30.ipynb
+│   └── markov_chain_*.pt / *.pth            # Saved trajectories and model checkpoints
+│
+├── training conditional score and testing accuracy/   # CMU & Gaussian kernel experiments
+│   ├── Messy_data_Training_conditional_score.py       # Score network training (main)
+│   ├── Messy_data_Training_resume.py                  # Resume training from checkpoint
+│   ├── train_two_markov_chains.py                     # Train on two Markov chain settings
+│   ├── MoCapAnimateAsfAmc.py                          # Motion capture data loader
+│   ├── Hyvarinens_score_diff_2_markov_chains.ipynb    # Score difference visualization
+│   ├── Synthesize_Gaussian_datapath.ipynb             # Synthetic data generation
+│   ├── Training_conditional_score.ipynb               # Training notebook
+│   ├── load_path_to_see_conditional_score.ipynb       # Load and inspect trained scores
+│   └── P_*.pth / *.pt                                 # Saved model checkpoints
+│
+├── training_amc/                             # CMU Motion Capture data (AMC/ASF format)
+│   └── running/                             # Motion sequences by subject
+│
+├── .gitignore
 └── README.md
 ```
 ---
