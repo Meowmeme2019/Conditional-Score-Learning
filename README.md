@@ -29,6 +29,8 @@ Key contributions:
 ---
 
 ## Repository Structure
+
+```
 .
 ├── non_Gaussian_MC/          # Experiments on synthetic non-Gaussian Markov chains
 ├── training_amc/             # Experiments on CMU Motion Capture data
@@ -40,8 +42,7 @@ Key contributions:
 ├── MoCapAnimateAsfAmc.py                      # Motion capture data loader/animator
 ├── train_two_markov_chains.py                 # Train on two Markov chain settings
 └── README.md
-
-
+```
 ---
 
 
