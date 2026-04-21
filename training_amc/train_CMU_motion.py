@@ -31,32 +31,32 @@ save_dir = root_dir
 # Trial configuration
 # Trial configuration
 training_sets = {
-    #"running": {
-    #    "02": ["03"],
-    #    "09": [f"{i:02d}" for i in range(1, 12)],
-    #    "16": ["08"] + [f"{i:02d}" for i in range(35, 47)] + [f"{i:02d}" for i in range(48, 58)],
-    #    "35": [f"{i:02d}" for i in range(17, 26)],          # trial 26 for testing
-    #    "38": ["03"]                                            # "38" for testing.
-    #       },
-    #"basketball": {
-    #    "06": [f"{i:02d}" for i in range(2, 14)]  # 02-14 for training, 15 for testing. 
-    #       },
+    "running": {
+        "02": ["03"],
+        "09": [f"{i:02d}" for i in range(1, 12)],
+        "16": ["08"] + [f"{i:02d}" for i in range(35, 47)] + [f"{i:02d}" for i in range(48, 58)],
+        "35": [f"{i:02d}" for i in range(17, 26)],          # trial 26 for testing
+        "38": ["03"]                                            # "38" for testing.
+    },
+    # "basketball": {
+    #     "06": [f"{i:02d}" for i in range(2, 15)]  # 02-14 for training, 15 for testing. 
+    # },
     "jumping": {
-        "13": ["11", "13", "19", "32", "39", "40", "42"],   # "41" for training
+        "13": ["11", "13", "19", "32", "39", "40", "41" ], 
         "16": [f"{i:02d}" for i in range(1, 11)], 
         "49": ["02", "03"]
-        }
+    }
 }
 
 testing_sets = {
     "running": {
-        "35": ["26"] 
+        "35": ["26"]    
     },
     "basketball": {
         "06": ["15"] 
     }, 
     "jumping": {
-        "13": ["41"]
+        "13": ["42"]
     }
 }
 
