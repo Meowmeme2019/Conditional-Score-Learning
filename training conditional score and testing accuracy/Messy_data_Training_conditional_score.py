@@ -80,6 +80,27 @@ def sample_markov_chain(n_steps, A, b, Sigma, x0=None, seed=None, show_progress=
 
     return np.array(X)
 
+def compute_hyvarinen_score(model, x, y, device):
+    """
+    Compute Hyvärinen score S_H(y,x;θ)
+    """
+    model.eval()
+    x = x.to(device)
+    y = y.clone().detach().to(device).requires_grad_(True)
+
+    with torch.set_grad_enabled(True):
+        psi = model(x, y)
+        loss1 = 0.5 * (psi ** 2).sum(dim=1)
+
+        grads = []
+        for i in range(psi.shape[1]):
+            grad = torch.autograd.grad(psi[:, i].sum(), y, create_graph=True)[0][:, i]
+            grads.append(grad)
+        divergence = torch.stack(grads, dim=1).sum(dim=1)
+        H_score = loss1 + divergence
+    return H_score
+
+
 
 #@title Define the Network
 
@@ -123,6 +144,7 @@ class ConditionalScoreNet(nn.Module):
 
 
 #@title Define the loss function
+
 def hyvarinen_loss(model, x, y):
     """
     Hyvarinen loss for conditional score learning.
@@ -151,31 +173,7 @@ def hyvarinen_loss(model, x, y):
     loss2 = divergence.mean()
     return loss1 + loss2
 
-#@title compute Hyvarinen score, a scalar
-def compute_hyvarinen_score(model, x, y, device):
-    """
-    Compute Hyvärinen score S_H(y,x;θ)
-    """
-    model.eval()
-    x = x.to(device)
-    y = y.clone().detach().to(device).requires_grad_(True)
 
-    with torch.set_grad_enabled(True):   # allow gradients for y
-        psi = model(x, y)
-        norm_term = 0.5 * (psi ** 2).sum(dim=1)
-
-        grads = []
-        for i in range(psi.shape[1]):
-            grad_i = torch.autograd.grad(
-                psi[:, i].sum(), y, create_graph=False, retain_graph=True
-            )[0][:, i]
-            grads.append(grad_i)
-        divergence = torch.stack(grads, dim=1).sum(dim=1)
-
-    return norm_term + divergence
-
-
-#@title check if the neural network can learn the score
 def evaluate_score_convergence(model_path, kernel_path, path_path, burn_in=0, max_plot=1000, hidden_dim =128, num_layers=4, device="cuda"):
     """
     Compare predicted and true conditional scores along the Markov path.
